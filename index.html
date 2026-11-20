@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PC STUDIO — Dark Curved Poster Templates</title>
+  <link rel="icon" type="image/png" href="assets/pc-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+  <!-- Cinematic Entrance Animation with Custom PC Logo -->
+  <div id="entranceOverlay" class="entrance-overlay">
+    <div class="entrance-ring" style="width:128px; height:128px; padding:4px;">
+      <div class="entrance-ring-inner" id="entranceLogoMark" style="overflow:hidden; background:#07080f;">
+        <img src="assets/pc-logo.png" alt="PC STUDIO Logo" style="width:100%; height:100%; object-fit:cover; border-radius:26px;" />
+      </div>
+    </div>
+    <div class="entrance-title" id="entranceTitle">PC STUDIO</div>
+    <div class="entrance-sub" id="entranceSub">Curve Your Vision • Design Your Thoughts</div>
+    <div class="entrance-bar"><div class="entrance-bar-fill"></div></div>
+    <button class="entrance-skip" id="skipEntranceBtn" type="button">Skip Intro →</button>
+  </div>
+
+  <!-- Floating Curved Navbar -->
+  <header class="site-header">
+    <nav class="nav-shell">
+      <a href="#top" class="brand-mark" data-tap-edit="brand">
+        <div class="brand-icon" id="navLogoBox" data-tap-edit="brandLogo" style="background:#07080f; padding:0;">
+          <img src="assets/pc-logo.png" alt="PC STUDIO" style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title" id="navBrandName" data-tap-edit="brandName">PC STUDIO</span>
+          <span class="brand-sub" id="navBrandTagline" data-tap-edit="brandTagline">Curved Dark Poster Studio</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#top" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link" id="navLinkAbout">About</a>
+        <a href="#templates" class="nav-link" id="navLinkTemplates">Templates</a>
+        <a href="#contact" class="nav-link" id="navLinkContact">Contact</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="admin.html" class="btn btn-ghost btn-sm" title="Admin Control Panel">
+          <span>⚙</span> Admin
+        </a>
+        <a href="#templates" class="btn btn-primary btn-sm">Create Poster</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- Hero Section with Kinetic Moving Headings -->
+    <section class="hero-section" id="heroSection">
+      <div class="container">
+        <div class="hero-card" id="heroCardBox">
+          <div class="hero-orb one"></div>
+          <div class="hero-orb two"></div>
+
+          <div class="hero-eyebrow">
+            <span class="pill-badge" id="heroBadgePill" data-tap-edit="heroBadge">
+              <span class="live-dot"></span>
+              <span id="heroBadgeText">Ultra-HD 5MB+ Poster Templates</span>
+            </span>
+          </div>
+
+          <div class="kinetic-heading-stage">
+            <h1 class="kinetic-heading slide-in" id="kineticHeading" data-tap-edit="movingHeadings">
+              Curve Your Vision &amp; Design Your Thoughts
+            </h1>
+          </div>
+
+          <p class="hero-subtitle" id="heroSubtitle" data-tap-edit="heroSubtitle"></p>
+
+          <div class="hero-cta-row">
+            <a href="#templates" class="btn btn-primary" id="heroPrimaryBtn" data-tap-edit="heroPrimaryBtn">Explore Templates ↓</a>
+            <a href="#contact" class="btn btn-ghost" id="heroSecondaryBtn" data-tap-edit="heroSecondaryBtn">Contact Founder</a>
+          </div>
+
+          <div class="marquee-wrap" id="marqueeSection" data-tap-edit="marquee">
+            <div class="marquee-track" id="marqueeTrack"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section-block" id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="pill-badge">About Studio</span>
+            <h2 class="section-title" id="aboutTitle" data-tap-edit="aboutTitle">Built For Creators, Events &amp; Bold Brands</h2>
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <div class="curved-card about-main-card">
+            <div>
+              <p class="section-desc" id="aboutText" data-tap-edit="aboutText" style="max-width:none; font-size:1rem; line-height:1.8;"></p>
+            </div>
+            <img id="aboutImage" class="about-banner-img hidden" alt="About PC STUDIO" data-tap-edit="aboutImage" />
+            <div style="display:flex; flex-wrap:wrap; gap:12px;">
+              <span class="pill-badge">✦ Poppins &amp; Custom Fonts</span>
+              <span class="pill-badge">✦ 5MB+ Lossless PNG</span>
+              <span class="pill-badge">✦ Instant Admin Sync</span>
+            </div>
+          </div>
+
+          <div class="about-highlights" id="aboutHighlights"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Templates Showcase Area -->
+    <section class="section-block" id="templates">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="pill-badge">Ready-To-Customize</span>
+            <h2 class="section-title" id="templatesTitle" data-tap-edit="templatesTitle">Featured Poster Templates</h2>
+            <p class="section-desc" id="templatesSubtitle" data-tap-edit="templatesSubtitle"></p>
+          </div>
+          <div class="pill-badge" id="templateCountBadge">0 Templates Live</div>
+        </div>
+
+        <div class="filter-bar" id="categoryFilterBar"></div>
+        <div class="templates-grid" id="templatesGrid"></div>
+      </div>
+    </section>
+
+    <!-- Founder & Message Area -->
+    <section class="section-block" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="pill-badge">Get In Touch</span>
+            <h2 class="section-title" id="contactTitle" data-tap-edit="contactTitle">Connect With The Founder</h2>
+            <p class="section-desc" id="contactSubtitle" data-tap-edit="contactSubtitle"></p>
+          </div>
+        </div>
+
+        <div class="contact-grid">
+          <div class="curved-card founder-card">
+            <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+              <img id="founderAvatarImg" class="hidden" alt="Founder" data-tap-edit="founderImage" style="width:74px; height:74px; border-radius:22px; object-fit:cover; border:2px solid var(--gold);" />
+              <div>
+                <span class="pill-badge" style="background:rgba(230,190,99,0.14); border-color:rgba(230,190,99,0.35); color:#f3d284;">
+                  ★ Founder &amp; Creative Lead
+                </span>
+                <h3 id="founderNameTitle" data-tap-edit="founderName" style="font-size:1.75rem; font-weight:800; margin-top:10px;">ASHABE PC</h3>
+              </div>
+            </div>
+            <p style="color:var(--text-secondary); font-size:0.9rem;">
+              Direct support for custom posters, event branding, and Photoshop PSD templates.
+            </p>
+
+            <div class="contact-item-list">
+              <a class="contact-pill" id="phoneLink" href="tel:+919605160931" data-tap-edit="phoneNumber">
+                <div class="contact-icon">📞</div>
+                <div>
+                  <div class="contact-pill-label">Phone / WhatsApp</div>
+                  <div class="contact-pill-value" id="founderPhone">+91 9605160931</div>
+                </div>
+              </a>
+
+              <a class="contact-pill" id="instaLink" href="https://instagram.com/iam_sabuu" target="_blank" rel="noopener" data-tap-edit="instagramHandle">
+                <div class="contact-icon">📸</div>
+                <div>
+                  <div class="contact-pill-label">Instagram</div>
+                  <div class="contact-pill-value" id="founderInsta">@iam_sabuu</div>
+                </div>
+              </a>
+
+              <div class="contact-pill" data-tap-edit="locationText">
+                <div class="contact-icon">📍</div>
+                <div>
+                  <div class="contact-pill-label">Studio Base</div>
+                  <div class="contact-pill-value" id="founderLocation">Kerala, India</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="curved-card message-card">
+            <h3 style="font-size:1.3rem; font-weight:700;">Send A Direct Message</h3>
+            <p style="font-size:0.86rem; color:var(--text-secondary); margin-top:4px;">
+              Your message appears instantly inside the Admin Panel inbox.
+            </p>
+            <form class="message-form" id="contactMessageForm">
+              <div class="form-row-2">
+                <div>
+                  <label class="field-label" for="msgName">Your Name</label>
+                  <input class="input" id="msgName" type="text" placeholder="Enter your name" required />
+                </div>
+                <div>
+                  <label class="field-label" for="msgContact">Phone / Instagram</label>
+                  <input class="input" id="msgContact" type="text" placeholder="+91 ... or @handle" required />
+                </div>
+              </div>
+              <div>
+                <label class="field-label" for="msgBody">Message</label>
+                <textarea class="textarea" id="msgBody" placeholder="Tell us about the poster or template you need..." required></textarea>
+              </div>
+              <div>
+                <button class="btn btn-primary" type="submit" style="width:100%;">
+                  Send Message ✦
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="curved-card footer-bar">
+        <span id="footerNote" data-tap-edit="footerNote">Crafted with precision by ASHABE PC • PC STUDIO All Rights Reserved.</span>
+        <div style="display:flex; gap:14px; align-items:center;">
+          <a href="#templates" style="color:var(--text-secondary);">Templates</a>
+          <a href="admin.html" style="color:var(--accent-light); font-weight:600;">Admin Panel →</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/defaults.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

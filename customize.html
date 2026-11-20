@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customize Poster — PC STUDIO</title>
+  <link rel="icon" type="image/png" href="assets/pc-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;600;700;800&family=Bebas+Neue&family=Cinzel:wght@600;700;800&family=Dancing+Script:wght@600;700&family=Gayathri:wght@400;700&family=Inter:wght@400;600;700;800&family=Manjari:wght@400;700&family=Montserrat:wght@400;600;700;800&family=Noto+Sans+Malayalam:wght@400;600;700;800&family=Oswald:wght@500;600;700&family=Playfair+Display:wght@600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Raleway:wght@400;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/customizer.css" />
+</head>
+<body>
+  <header class="customizer-topbar">
+    <div class="customizer-bar-inner">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <a href="index.html" class="btn btn-ghost btn-sm">← Back to Home</a>
+        <img src="assets/pc-logo.png" alt="PC STUDIO" style="width:36px; height:36px; border-radius:11px; object-fit:cover;" />
+        <div class="brand-text-wrap">
+          <span class="brand-title" id="topBrandName">PC STUDIO</span>
+          <span class="brand-sub">Live Poster Customizer</span>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+        <label class="btn btn-ghost btn-sm" style="cursor:pointer; border-color:rgba(230,190,99,0.4); color:#f3d284;" title="Upload Custom Font (.ttf, .otf, .woff)">
+          Aa+ Add Font
+          <input id="customizerAddFontInput" type="file" accept=".ttf,.otf,.woff,.woff2" style="display:none;" />
+        </label>
+        <button class="btn btn-ghost btn-sm" id="resetTemplateBtn" type="button">↺ Reset Text</button>
+        <button class="btn btn-primary btn-sm" id="topDownloadBtn" type="button">⬇ Download Poster (5MB+)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="customizer-shell">
+    <section class="curved-card editor-pane">
+      <div class="poster-main-heading-box">
+        <span class="pill-badge">✦ PC STUDIO Customizer</span>
+        <h1 id="posterMainHeading">Loading Poster...</h1>
+        <p id="posterSubMeta">Edit any box below — change text, font, size, bold, or color and watch the poster update live.</p>
+      </div>
+
+      <div class="fields-stack" id="editableFieldsContainer"></div>
+    </section>
+
+    <aside class="curved-card preview-pane">
+      <div class="preview-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="live-dot"></span>
+          <strong style="font-size:0.95rem;">Live Half-Scene Preview</strong>
+        </div>
+        <span class="pill-badge" id="canvasDimensionsBadge">1080 × 1350 px</span>
+      </div>
+
+      <div class="preview-canvas-stage">
+        <canvas id="livePosterCanvas"></canvas>
+      </div>
+
+      <div class="download-box">
+        <div class="quality-meta">
+          <strong>Ultra-HD Lossless PNG Export</strong>
+          <span id="exportQualityInfo">300 DPI Print Scale • Guaranteed ≥ 5.0 MB • Zero Quality Loss</span>
+        </div>
+        <button class="btn btn-gold" id="mainDownloadBtn" type="button">
+          ⬇ Download The Poster
+        </button>
+      </div>
+    </aside>
+  </main>
+
+  <script src="js/defaults.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/customizer.js"></script>
+</body>
+</html>

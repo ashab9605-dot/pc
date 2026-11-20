@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poster Studio — PC STUDIO</title>
+  <link rel="icon" type="image/png" href="assets/pc-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;600;700;800&family=Bebas+Neue&family=Cinzel:wght@600;700;800&family=Dancing+Script:wght@600;700&family=Gayathri:wght@400;700&family=Inter:wght@400;600;700;800&family=Manjari:wght@400;700&family=Montserrat:wght@400;600;700;800&family=Noto+Sans+Malayalam:wght@400;600;700;800&family=Oswald:wght@500;600;700&family=Playfair+Display:wght@600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Raleway:wght@400;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/studio.css" />
+  <style>
+    .big-color-box {
+      padding: 16px;
+      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(124, 92, 255, 0.16), rgba(34, 211, 238, 0.08));
+      border: 1.5px solid rgba(124, 92, 255, 0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .big-color-trigger {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .big-color-input {
+      flex: 1;
+      height: 48px;
+      border-radius: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.22);
+      background: transparent;
+      padding: 3px;
+      cursor: pointer;
+    }
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+    }
+    .swatch-dot {
+      height: 26px;
+      border-radius: 9px;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .swatch-dot:hover {
+      transform: scale(1.1);
+    }
+    .font-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+  </style>
+</head>
+<body class="studio-body">
+  <!-- Top Studio Toolbar -->
+  <header class="studio-topbar">
+    <div class="studio-top-left">
+      <a href="admin.html" class="icon-pill-btn" title="Back to Admin Panel">←</a>
+      <img src="assets/pc-logo.png" alt="PC STUDIO" style="width:36px; height:36px; border-radius:11px; object-fit:cover; box-shadow:0 4px 14px rgba(124,92,255,0.4);" />
+      <div>
+        <div style="font-size:0.74rem; color:var(--text-muted); line-height:1;">PC STUDIO • Poster Studio</div>
+        <input id="studioTplName" class="studio-title-input" type="text" value="Untitled Poster" />
+      </div>
+      <button class="icon-pill-btn" id="newFileBtn" type="button" title="New File (Photoshop Presets)">+ New File</button>
+      <label class="icon-pill-btn" style="cursor:pointer;" title="Open Adobe Photoshop (.PSD) File">
+        📂 Open PSD
+        <input id="openPsdInput" type="file" accept=".psd,image/vnd.adobe.photoshop" style="display:none;" />
+      </label>
+      <label class="icon-pill-btn" style="cursor:pointer; border-color:rgba(230,190,99,0.4); color:#f3d284;" title="Upload Custom Font (.ttf, .otf, .woff)">
+        Aa+ Add Font
+        <input id="topAddFontInput" type="file" accept=".ttf,.otf,.woff,.woff2" style="display:none;" />
+      </label>
+    </div>
+
+    <div class="studio-top-center">
+      <button class="icon-pill-btn" id="undoBtn" type="button" title="Undo (Ctrl+Z)">↶</button>
+      <button class="icon-pill-btn" id="redoBtn" type="button" title="Redo (Ctrl+Y)">↷</button>
+      <button class="icon-pill-btn active" id="snapToggleBtn" type="button" title="Snap to Center Guides">🧲</button>
+      <button class="icon-pill-btn" id="gridToggleBtn" type="button" title="Toggle Alignment Grid">⊞</button>
+    </div>
+
+    <div class="studio-top-right">
+      <span class="saved-status-pill" id="savedStatusPill">● Live on Main Page</span>
+      <button class="icon-pill-btn" id="exactPreviewBtn" type="button">Exact preview</button>
+      <button class="icon-pill-btn" id="exportPngBtn" type="button">Export 5MB+</button>
+      <a href="index.html#templates" target="_blank" class="icon-pill-btn" title="Open Main Home Templates">View Home ↗</a>
+      <button class="btn btn-primary btn-sm" id="saveDesignBtn" type="button">Save design</button>
+    </div>
+  </header>
+
+  <!-- 3-Column Photoshop Workspace -->
+  <div class="studio-workspace">
+    <!-- LEFT PANEL: Layers & Canvas -->
+    <aside class="studio-panel left">
+      <div>
+        <div class="panel-section-title">
+          <span>LAYERS</span>
+          <span id="layerCountLbl">0</span>
+        </div>
+        <div class="layers-list" id="layersList"></div>
+      </div>
+
+      <div class="add-layer-grid">
+        <button class="add-tool-btn" id="addTextBtn" type="button"><span>T</span>Text</button>
+        <button class="add-tool-btn" id="addShapeBtn" type="button"><span>▢</span>Shape</button>
+        <label class="add-tool-btn" style="cursor:pointer;">
+          <span>🖼</span>Image
+          <input id="addImageInput" type="file" accept="image/*" style="display:none;" />
+        </label>
+        <button class="add-tool-btn" id="addPhotoBtn" type="button"><span>👤</span>Photo</button>
+      </div>
+
+      <div>
+        <div class="panel-section-title"><span>CANVAS</span></div>
+        <label class="prop-mini-label">SIZE PRESET</label>
+        <select id="canvasPresetSelect" class="prop-input" style="margin-bottom:10px;">
+          <option value="custom">Custom</option>
+          <option value="1080x1080">Instagram Post (1080 × 1080)</option>
+          <option value="1080x1350">Instagram Portrait (1080 × 1350)</option>
+          <option value="1080x1920">Instagram Story / Reel (1080 × 1920)</option>
+          <option value="1280x720">YouTube Thumbnail (1280 × 720)</option>
+          <option value="2480x3508">A4 Portrait Print (2480 × 3508)</option>
+          <option value="3508x2480">A4 Landscape Print (3508 × 2480)</option>
+          <option value="1122x1400">Event Poster (1122 × 1400)</option>
+          <option value="1640x624">Facebook Cover (1640 × 624)</option>
+        </select>
+
+        <div class="prop-grid-2" style="margin-bottom:12px;">
+          <div>
+            <label class="prop-mini-label">WIDTH (PX)</label>
+            <input id="canvasWidthInput" class="prop-input" type="number" min="100" max="6000" />
+          </div>
+          <div>
+            <label class="prop-mini-label">HEIGHT (PX)</label>
+            <input id="canvasHeightInput" class="prop-input" type="number" min="100" max="6000" />
+          </div>
+        </div>
+
+        <div class="seg-tabs" style="margin-bottom:10px;">
+          <button class="seg-tab" data-bgtype="gradient" type="button">Gradient</button>
+          <button class="seg-tab active" data-bgtype="solid" type="button">Solid</button>
+          <button class="seg-tab" data-bgtype="image" type="button">Image</button>
+        </div>
+
+        <div id="bgColorRow" class="prop-grid-2">
+          <div>
+            <label class="prop-mini-label">COLOUR 1</label>
+            <input id="bgColor1" type="color" class="prop-input" style="height:38px; padding:3px;" />
+          </div>
+          <div id="bgColor2Wrap">
+            <label class="prop-mini-label">COLOUR 2</label>
+            <input id="bgColor2" type="color" class="prop-input" style="height:38px; padding:3px;" />
+          </div>
+        </div>
+        <div id="bgImageWrap" class="hidden" style="margin-top:8px;">
+          <label class="btn btn-ghost btn-sm" style="width:100%; cursor:pointer;">
+            Upload Background Image
+            <input id="bgImageInput" type="file" accept="image/*" style="display:none;" />
+          </label>
+        </div>
+
+        <div style="margin-top:12px;">
+          <label class="prop-mini-label">TEMPLATE CATEGORY</label>
+          <input id="studioTplCategory" class="prop-input" type="text" placeholder="Event, Festival, YouTube..." />
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER LIVE WORKSPACE -->
+    <main class="studio-center">
+      <div class="workspace-hints-bar">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="live-dot"></span>
+          <strong style="color:#fff; letter-spacing:0.06em;">LIVE WORKSPACE</strong>
+        </div>
+        <div>Tap any Text, Image or Element to Change Colour • Drag to move • Handles to resize • <span style="color:#22c55e;">●</span> rotate</div>
+      </div>
+
+      <div class="canvas-viewport" id="canvasViewport">
+        <div class="canvas-stage-wrapper" id="stageWrapper">
+          <canvas id="studioCanvas"></canvas>
+          <canvas id="overlayCanvas"></canvas>
+        </div>
+      </div>
+
+      <div class="floating-coords-pill" id="coordsPill">Select any Text, Image or Element to Change Colour</div>
+
+      <div class="floating-zoom-pill">
+        <button class="zoom-btn" id="zoomOutBtn" type="button">−</button>
+        <span id="zoomLabel" style="font-size:0.8rem; font-weight:700; min-width:42px; text-align:center;">50%</span>
+        <button class="zoom-btn" id="zoomInBtn" type="button">+</button>
+        <button class="zoom-btn" id="zoomFitBtn" type="button">Fit</button>
+      </div>
+    </main>
+
+    <!-- RIGHT INSPECTOR PANEL -->
+    <aside class="studio-panel right" id="inspectorPanel">
+      <div id="noSelectionHint" style="padding:28px 12px; text-align:center; color:var(--text-muted); font-size:0.84rem;">
+        Tap any Text, Image, PSD Element, or Shape on the canvas to open the large <strong>Change Colour</strong> box, Font selector, and Layer controls.
+      </div>
+
+      <div id="layerInspector" class="hidden" style="display:flex; flex-direction:column; gap:14px;">
+        <!-- Layer Name & Actions -->
+        <div style="display:flex; gap:6px; align-items:center;">
+          <input id="inspName" class="prop-input" type="text" style="flex:1; font-weight:600;" />
+          <button class="icon-pill-btn" id="layerUpBtn" type="button" title="Bring Forward">↑</button>
+          <button class="icon-pill-btn" id="layerDownBtn" type="button" title="Send Backward">↓</button>
+          <button class="icon-pill-btn" id="layerDupBtn" type="button" title="Duplicate Layer">⧉</button>
+          <button class="icon-pill-btn" id="layerDelBtn" type="button" title="Delete Layer" style="color:#fca5a5;">🗑</button>
+        </div>
+
+        <!-- BIG UNIVERSAL "CHANGE COLOUR" PANEL (Works on Text, Shapes, Images & PSD Elements!) -->
+        <div class="big-color-box">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="font-size:0.88rem; color:#fff;">🎨 Change Colour</strong>
+            <span id="bigColorHexLbl" style="font-size:0.74rem; font-family:monospace; color:#dcd3ff;">#FFFFFF</span>
+          </div>
+          <div class="big-color-trigger">
+            <input id="bigColorPicker" type="color" class="big-color-input" value="#ffffff" />
+            <button id="bigColorResetBtn" type="button" class="icon-pill-btn hidden" title="Restore Original Image Colors">Original</button>
+          </div>
+          <div class="swatch-grid" id="quickColorSwatches"></div>
+
+          <!-- Extra Recolor Mode & Hue Controls for Images / PSD Graphics / Photos -->
+          <div id="imageRecolorExtras" class="hidden" style="display:flex; flex-direction:column; gap:8px; padding-top:6px; border-top:1px solid rgba(255,255,255,0.1);">
+            <div class="prop-grid-2">
+              <div>
+                <label class="prop-mini-label">RECOLOR MODE</label>
+                <select id="inspRecolorMode" class="prop-input">
+                  <option value="colorize">Colorize (Keep Shading)</option>
+                  <option value="solid">Solid Fill (Logos/Icons)</option>
+                  <option value="tint">Soft Tint Overlay</option>
+                </select>
+              </div>
+              <div>
+                <label class="prop-mini-label">HUE SHIFT (<span id="hueShiftVal">0</span>°)</label>
+                <input id="inspHueShift" type="range" min="-180" max="180" value="0" style="width:100%; accent-color:var(--accent-2); margin-top:8px;" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MARK EDITABLE ON HOME PAGE -->
+        <div class="home-mark-box">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+            <strong style="font-size:0.8rem; color:#f3d284;">★ Editable on Home Page</strong>
+            <input type="checkbox" class="switch-input" id="inspEditableToggle" />
+          </div>
+          <div id="inspEditableLabelWrap">
+            <label class="prop-mini-label">FIELD LABEL FOR VISITORS</label>
+            <input id="inspEditableLabel" class="prop-input" type="text" placeholder="e.g. Participant Name, Date..." />
+          </div>
+        </div>
+
+        <!-- TYPOGRAPHY & FONT SELECTOR + ADD FONT -->
+        <div id="inspTypographyBox" class="hidden">
+          <div class="panel-section-title"><span>TYPOGRAPHY &amp; FONTS</span></div>
+          <div style="margin-bottom:8px;">
+            <label class="prop-mini-label">TEXT CONTENT</label>
+            <textarea id="inspText" class="prop-input" rows="3"></textarea>
+          </div>
+          <div style="margin-bottom:8px;">
+            <label class="prop-mini-label">FONT FAMILY</label>
+            <div class="font-row">
+              <select id="inspFontFamily" class="prop-input" style="flex:1;"></select>
+              <label class="icon-pill-btn" style="cursor:pointer; white-space:nowrap; border-color:rgba(230,190,99,0.45); color:#f3d284;" title="Upload .ttf / .otf / .woff font">
+                + Add Font
+                <input id="inspAddFontInput" type="file" accept=".ttf,.otf,.woff,.woff2" style="display:none;" />
+              </label>
+            </div>
+          </div>
+          <div class="prop-grid-2" style="margin-bottom:8px;">
+            <div>
+              <label class="prop-mini-label">FONT SIZE</label>
+              <input id="inspFontSize" class="prop-input" type="number" min="8" max="300" />
+            </div>
+            <div>
+              <label class="prop-mini-label">WEIGHT</label>
+              <select id="inspFontWeight" class="prop-input">
+                <option value="300">Light (300)</option>
+                <option value="400">Regular (400)</option>
+                <option value="500">Medium (500)</option>
+                <option value="600">SemiBold (600)</option>
+                <option value="700">Bold (700)</option>
+                <option value="800">ExtraBold (800)</option>
+              </select>
+            </div>
+            <div>
+              <label class="prop-mini-label">ALIGNMENT</label>
+              <select id="inspTextAlign" class="prop-input">
+                <option value="left">Left</option>
+                <option value="center">Center</option>
+                <option value="right">Right</option>
+              </select>
+            </div>
+            <div>
+              <label class="prop-mini-label">LINE HEIGHT</label>
+              <input id="inspLineHeight" class="prop-input" type="number" step="0.05" min="0.8" max="2.5" value="1.2" />
+            </div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="icon-pill-btn" id="inspItalicBtn" type="button" style="flex:1;">Italic</button>
+            <button class="icon-pill-btn" id="inspShadowBtn" type="button" style="flex:1;">Drop Shadow</button>
+          </div>
+        </div>
+
+        <!-- POSITION & SIZE -->
+        <div>
+          <div class="panel-section-title"><span>POSITION &amp; SIZE</span></div>
+          <div class="prop-grid-2" style="margin-bottom:8px;">
+            <div><label class="prop-mini-label">X</label><input id="inspX" class="prop-input" type="number" /></div>
+            <div><label class="prop-mini-label">Y</label><input id="inspY" class="prop-input" type="number" /></div>
+            <div><label class="prop-mini-label">WIDTH</label><input id="inspW" class="prop-input" type="number" /></div>
+            <div><label class="prop-mini-label">HEIGHT</label><input id="inspH" class="prop-input" type="number" /></div>
+            <div><label class="prop-mini-label">ROTATE °</label><input id="inspRot" class="prop-input" type="number" /></div>
+            <div><label class="prop-mini-label">OPACITY %</label><input id="inspOpacity" class="prop-input" type="number" min="0" max="100" /></div>
+          </div>
+
+          <label class="prop-mini-label">ALIGN TO POSTER</label>
+          <div class="prop-grid-3">
+            <button class="icon-pill-btn" data-align="left" type="button">Left</button>
+            <button class="icon-pill-btn" data-align="center" type="button">Centre</button>
+            <button class="icon-pill-btn" data-align="right" type="button">Right</button>
+            <button class="icon-pill-btn" data-align="top" type="button">Top</button>
+            <button class="icon-pill-btn" data-align="middle" type="button">Middle</button>
+            <button class="icon-pill-btn" data-align="bottom" type="button">Bottom</button>
+          </div>
+        </div>
+
+        <!-- SHAPE / IMAGE / CORNER RADIUS -->
+        <div id="inspVisualBox" class="hidden">
+          <div class="panel-section-title"><span>BORDER &amp; CORNER RADIUS</span></div>
+          <div class="prop-grid-2" style="margin-bottom:8px;">
+            <div>
+              <label class="prop-mini-label">BORDER COLOUR</label>
+              <input id="inspStroke" type="color" class="prop-input" style="height:36px; padding:3px;" />
+            </div>
+            <div>
+              <label class="prop-mini-label">BORDER WIDTH</label>
+              <input id="inspStrokeW" class="prop-input" type="number" min="0" max="40" />
+            </div>
+          </div>
+          <div id="inspFitWrap" style="margin-bottom:8px;">
+            <label class="prop-mini-label">IMAGE FIT</label>
+            <select id="inspFit" class="prop-input">
+              <option value="cover">Fill (crop)</option>
+              <option value="contain">Fit (contain)</option>
+            </select>
+          </div>
+
+          <label class="prop-mini-label">CORNER RADIUS (<span id="inspRadiusVal">0</span>px)</label>
+          <input id="inspRadius" type="range" min="0" max="300" style="width:100%; accent-color:var(--accent); margin-bottom:8px;" />
+          <div class="prop-grid-3" style="grid-template-columns:repeat(4,1fr);">
+            <button class="icon-pill-btn" data-rad="0" type="button">Square</button>
+            <button class="icon-pill-btn" data-rad="24" type="button">Soft</button>
+            <button class="icon-pill-btn" data-rad="64" type="button">Round</button>
+            <button class="icon-pill-btn" data-rad="999" type="button">Circle</button>
+          </div>
+
+          <div id="inspImageReplaceWrap" style="margin-top:10px;">
+            <label class="btn btn-ghost btn-sm" style="width:100%; cursor:pointer;">
+              Replace Layer Image
+              <input id="inspReplaceImgInput" type="file" accept="image/*" style="display:none;" />
+            </label>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- NEW FILE PHOTOSHOP PRESETS MODAL -->
+  <div id="newFileModal" class="studio-modal-backdrop hidden">
+    <div class="studio-modal">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="font-size:1.3rem; font-weight:800;">New Poster Document</h2>
+        <button class="icon-pill-btn" id="closeNewModalBtn" type="button">✕</button>
+      </div>
+      <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">
+        Choose a standard Photoshop canvas size or enter custom dimensions.
+      </p>
+
+      <div class="preset-cards-grid" id="newPresetsGrid"></div>
+
+      <div class="prop-grid-3" style="margin-top:12px;">
+        <div>
+          <label class="prop-mini-label">POSTER NAME</label>
+          <input id="newDocName" class="prop-input" type="text" value="New PC Studio Poster" />
+        </div>
+        <div>
+          <label class="prop-mini-label">WIDTH (PX)</label>
+          <input id="newDocW" class="prop-input" type="number" value="1080" />
+        </div>
+        <div>
+          <label class="prop-mini-label">HEIGHT (PX)</label>
+          <input id="newDocH" class="prop-input" type="number" value="1350" />
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+        <button class="btn btn-ghost btn-sm" id="cancelNewModalBtn" type="button">Cancel</button>
+        <button class="btn btn-primary btn-sm" id="createNewDocBtn" type="button">Create Canvas →</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SAVE DESIGN & PUBLISH TO MAIN PAGE MODAL (Matches User Screenshot!) -->
+  <div id="publishModal" class="studio-modal-backdrop hidden">
+    <div class="studio-modal" style="width:min(640px, 95vw); padding:30px 32px; border-radius:26px; background:#0e101c; border:1px solid rgba(255,255,255,0.12);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:22px;">
+        <h2 style="font-size:1.35rem; font-weight:700; color:#ffffff;">Save Design &amp; Publish to Main Page</h2>
+        <button class="icon-pill-btn" id="closePublishModalBtn" type="button" style="width:36px; height:36px; border-radius:12px;">✕</button>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div>
+          <label class="field-label" style="font-size:0.74rem; letter-spacing:0.08em; color:#8f96b3;">TEMPLATE TITLE</label>
+          <input id="pubTitleInput" class="input" type="text" placeholder="e.g., DIWALI, Leaders Summit '26" style="background:#080911; border-radius:14px; padding:13px 16px;" />
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+          <div>
+            <label class="field-label" style="font-size:0.74rem; letter-spacing:0.08em; color:#8f96b3;">CATEGORY</label>
+            <input id="pubCategoryInput" list="pubCategoryOptions" class="input" type="text" placeholder="Community, Event, Festival..." style="background:#080911; border-radius:14px; padding:13px 16px;" />
+            <datalist id="pubCategoryOptions">
+              <option value="Community"></option>
+              <option value="Event"></option>
+              <option value="Festival"></option>
+              <option value="Achievement"></option>
+              <option value="YouTube"></option>
+              <option value="Business"></option>
+              <option value="Custom"></option>
+            </datalist>
+          </div>
+          <div>
+            <label class="field-label" style="font-size:0.74rem; letter-spacing:0.08em; color:#8f96b3;">VERSION NOTE</label>
+            <input id="pubVersionNoteInput" class="input" type="text" placeholder="e.g., Published from Studio" style="background:#080911; border-radius:14px; padding:13px 16px;" />
+          </div>
+        </div>
+
+        <div>
+          <label class="field-label" style="font-size:0.74rem; letter-spacing:0.08em; color:#8f96b3;">DESCRIPTION</label>
+          <textarea id="pubDescriptionInput" class="textarea" rows="3" placeholder="Describe this poster template..." style="background:#080911; border-radius:14px; padding:13px 16px; min-height:94px;"></textarea>
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:6px 2px;">
+          <span style="font-size:0.9rem; color:#c5cbe0;">Show immediately on Main Page Templates Gallery</span>
+          <input type="checkbox" class="switch-input" id="pubShowGalleryToggle" checked />
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:6px;">
+          <button class="btn btn-ghost" id="cancelPublishModalBtn" type="button" style="border-radius:16px; padding:12px 24px;">Cancel</button>
+          <button class="btn btn-primary" id="confirmPublishBtn" type="button" style="border-radius:16px; padding:12px 26px; background:linear-gradient(135deg, #8b62ff, #6d4aff);">Save &amp; Publish Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXACT PREVIEW MODAL -->
+  <div id="previewModal" class="studio-modal-backdrop hidden">
+    <div class="studio-modal" style="width:min(780px, 95vw); text-align:center;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h2 style="font-size:1.15rem; font-weight:700;">Exact Poster Preview</h2>
+        <button class="icon-pill-btn" id="closePreviewModalBtn" type="button">✕</button>
+      </div>
+      <canvas id="exactPreviewCanvas" style="max-width:100%; max-height:72vh; border-radius:16px;"></canvas>
+    </div>
+  </div>
+
+  <script src="js/defaults.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/psd-parser.js"></script>
+  <script src="js/studio.js"></script>
+</body>
+</html>

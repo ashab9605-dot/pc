@@ -1,0 +1,327 @@
+/* ==========================================================================
+   ADMIN PANEL STYLES — Dark Curved Control Center & Golden Studio CTA
+   ========================================================================== */
+
+.login-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.login-card {
+  width: min(440px, 100%);
+  padding: 38px 34px;
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+
+/* Dashboard Layout */
+.admin-layout {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  background: rgba(11, 13, 21, 0.94);
+  border-right: 1px solid var(--border-subtle);
+  padding: 22px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.22s ease;
+}
+
+.sidebar-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.sidebar-btn.active {
+  background: linear-gradient(135deg, rgba(124, 92, 255, 0.22), rgba(124, 92, 255, 0.08));
+  border-color: rgba(124, 92, 255, 0.42);
+  color: #fff;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-main {
+  padding: 28px clamp(18px, 3vw, 40px) 60px;
+  max-width: 1320px;
+  width: 100%;
+}
+
+.admin-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+/* Signature Golden "Open Poster Studio" Button (matches user screenshot!) */
+.open-studio-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 34px;
+  border-radius: 22px;
+  border: none;
+  background: #e6be63;
+  color: #14171f;
+  font-size: 1.08rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 32px rgba(230, 190, 99, 0.34);
+  transition: transform 0.25s var(--ease-smooth), box-shadow 0.25s ease, filter 0.2s;
+}
+
+.open-studio-hero-btn:hover {
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 18px 40px rgba(230, 190, 99, 0.48);
+  filter: brightness(1.04);
+}
+
+/* KPI Row */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.kpi-card {
+  padding: 22px 24px;
+  border-radius: 24px;
+}
+
+.kpi-label {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+/* CMS Editor Sections */
+.cms-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.cms-card {
+  padding: 26px;
+  border-radius: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cms-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cms-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Switch Toggle */
+.switch-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.switch-input {
+  appearance: none;
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  background: #282d42;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.switch-input::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.25s var(--ease-smooth);
+}
+
+.switch-input:checked {
+  background: var(--accent);
+}
+
+.switch-input:checked::after {
+  transform: translateX(20px);
+}
+
+/* Repeatable Item List */
+.repeatable-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.repeatable-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(9, 10, 16, 0.72);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Admin Templates Grid */
+.admin-tpl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.admin-tpl-card {
+  border-radius: 26px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-tpl-thumb {
+  height: 230px;
+  background: #08090f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  position: relative;
+}
+
+.admin-tpl-thumb canvas {
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.admin-tpl-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-tpl-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* Activity Feed & Messages */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 20px;
+  border-radius: 20px;
+  background: rgba(10, 12, 20, 0.76);
+  border: 1px solid var(--border-subtle);
+}
+
+.live-mirror-frame {
+  width: 100%;
+  height: 76vh;
+  border: 1px solid var(--border-mid);
+  border-radius: 26px;
+  background: #050508;
+}
+
+@media (max-width: 900px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+  .admin-sidebar {
+    position: relative;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .cms-row-2 {
+    grid-template-columns: 1fr;
+  }
+}

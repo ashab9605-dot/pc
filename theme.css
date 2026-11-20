@@ -1,0 +1,344 @@
+/* ==========================================================================
+   ASHABE POSTER STUDIO — Global Dark Curved Theme (Poppins)
+   ========================================================================== */
+
+:root {
+  --bg-void: #050508;
+  --bg-primary: #090a10;
+  --bg-surface: #11131d;
+  --bg-surface-2: #171a27;
+  --bg-surface-3: #1e2233;
+  --bg-glass: rgba(17, 19, 29, 0.78);
+  --bg-glass-strong: rgba(14, 16, 25, 0.92);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-mid: rgba(255, 255, 255, 0.14);
+  --border-accent: rgba(124, 92, 255, 0.45);
+
+  --text-primary: #f5f7ff;
+  --text-secondary: #a2a9c4;
+  --text-muted: #6c7491;
+
+  --accent: #7c5cff;
+  --accent-light: #9b82ff;
+  --accent-glow: rgba(124, 92, 255, 0.35);
+  --accent-2: #22d3ee;
+  --gold: #e6be63;
+  --gold-dark: #c99e3f;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  /* Curved Rectangle Design System */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 6px 20px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 14px 38px rgba(0, 0, 0, 0.48);
+  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.65);
+  --shadow-accent: 0 10px 30px rgba(124, 92, 255, 0.35);
+
+  --font-main: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 10%, rgba(124, 92, 255, 0.14), transparent 36%),
+    radial-gradient(circle at 88% 18%, rgba(34, 211, 238, 0.09), transparent 34%),
+    radial-gradient(circle at 50% 92%, rgba(230, 190, 99, 0.06), transparent 38%),
+    var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, textarea, select {
+  font-family: var(--font-main);
+  color: var(--text-primary);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: #272c42;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Curved Containers */
+.curved-card {
+  background: linear-gradient(155deg, rgba(23, 26, 39, 0.92), rgba(14, 16, 25, 0.96));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(16px);
+  transition: transform 0.35s var(--ease-smooth), border-color 0.3s ease, box-shadow 0.35s ease;
+}
+
+.curved-card:hover {
+  border-color: var(--border-mid);
+}
+
+/* Curved Pill Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: all 0.28s var(--ease-smooth);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #5b3df5);
+  color: #fff;
+  box-shadow: var(--shadow-accent);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(124, 92, 255, 0.5);
+  filter: brightness(1.06);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #edc76c, #dca942);
+  color: #12141c;
+  font-weight: 700;
+  box-shadow: 0 10px 28px rgba(230, 190, 99, 0.32);
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(230, 190, 99, 0.48);
+  filter: brightness(1.04);
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--border-mid);
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background: rgba(239, 68, 68, 0.14);
+  border-color: rgba(239, 68, 68, 0.32);
+  color: #fca5a5;
+}
+.btn-danger:hover {
+  background: rgba(239, 68, 68, 0.24);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.82rem;
+}
+
+/* Curved Form Inputs */
+.input, .textarea, .select {
+  width: 100%;
+  background: rgba(9, 10, 16, 0.88);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.input:focus, .textarea:focus, .select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.18);
+  background: rgba(14, 16, 26, 0.98);
+}
+
+.textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+/* Badges */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: rgba(124, 92, 255, 0.14);
+  border: 1px solid rgba(124, 92, 255, 0.3);
+  color: var(--accent-light);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 12px var(--success);
+  animation: pulseDot 1.8s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.82); }
+}
+
+/* Toast Notifications */
+.toast-stack {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border-mid);
+  box-shadow: var(--shadow-md);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-weight: 500;
+  backdrop-filter: blur(18px);
+  animation: toastIn 0.35s var(--ease-smooth) forwards;
+}
+
+.toast.success { border-color: rgba(34, 197, 94, 0.45); }
+.toast.error { border-color: rgba(239, 68, 68, 0.45); }
+.toast.info { border-color: rgba(124, 92, 255, 0.45); }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Brand Logo Emblem */
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent), #22d3ee);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 24px rgba(124, 92, 255, 0.4);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.brand-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.brand-text-wrap {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.brand-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.brand-sub {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Container */
+.container {
+  width: min(1240px, 92%);
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none !important;
+}
